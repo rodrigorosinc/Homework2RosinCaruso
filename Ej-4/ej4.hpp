@@ -29,6 +29,7 @@ CuentaCorriente.
 #pragma once
 #include <iostream>
 #include <string>
+#include <memory>
 
 using namespace std;
 
@@ -38,7 +39,8 @@ class Cuenta{
     string titular;
     
     public:
-    Cuenta(double balance, string titlar);
+    Cuenta(double balance, string titular);
+    virtual ~Cuenta() = default; 
     void depositar(double cantidad);
     virtual void retirar(double cantidad) = 0;
     virtual void mostrarInfo() = 0;
@@ -60,11 +62,10 @@ class CajaDeAhorro : public Cuenta{
 
 class CuentaCorriente : public Cuenta{
     private:
-    CajaDeAhorro caja;
+    shared_ptr<CajaDeAhorro> caja;
     
     public:
-    CuentaCorriente(double balance_total, string titular, CajaDeAhorro caja);
-    void depositar(double cantidad);
+    CuentaCorriente(double balance_total, string titular, shared_ptr<CajaDeAhorro> caja);
     void retirar(double cantidad) override;
     void mostrarInfo() override;
 };

@@ -101,3 +101,9 @@ void Curso::printStudentsOrdered(){
         cout << *estudiantes[i] << endl;
     }
 }
+
+void Curso::deepCopy(string name, vector<shared_ptr<Estudiante>> estudiantes) {
+    this->name = name;
+    this->estudiantes = estudiantes;
+    this->size = estudiantes.size();
+}

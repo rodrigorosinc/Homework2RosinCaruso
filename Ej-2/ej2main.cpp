@@ -2,20 +2,6 @@
 
 using namespace std;
 
-// Función para imprimir los estudiantes
-/*Como se mencionó anteriormente, un objeto de la clase Curso contendrá la lista 
-de estudiantes del curso (el vector conteniendo objetos tipo estudiante). La 
-clase Curso permite: 
-i. Inscribir y desinscribir estudiantes al curso. 
-ii. Ver si un estudiante se encuentra inscripto o no en el curso buscándolo por 
-su legajo. 
-iii. Indicar si el curso está completo o no, teniendo en cuenta que el curso tiene 
-una capacidad de 20 alumnos. 
-iv. Imprimir la lista de estudiantes en orden alfabético. Para ello, utilice el 
-algoritmo std::sort() en <algorithm>, el cual requerirá sobreescribir el 
-operador “<”, y sobreescriba el operador “<<” (del método y clase que 
-correspondan) para presentar los datos por pantalla. */
-
 void printMenu(){
     cout << "1. Inscribir estudiante" << endl;
     cout << "2. Desinscribir estudiante" << endl;
@@ -82,15 +68,20 @@ int main() {
     shared_ptr<Estudiante> e8 = make_shared<Estudiante>("Nicolás Otamendi", 105);
     shared_ptr<Estudiante> e9 = make_shared<Estudiante>("Gonzalo Montiel", 106);
     shared_ptr<Estudiante> e10 = make_shared<Estudiante>("Alexis Mac Allister", 107);
+    // Agrego a curso 1
     curso1.addStudent(e1); curso1.addStudent(e2); curso1.addStudent(e3);
     curso1.addStudent(e4); curso1.addStudent(e5); curso1.addStudent(e6);
+    // Agrego a curso 2
     curso2.addStudent(e7); curso2.addStudent(e8); curso2.addStudent(e9);
     curso2.addStudent(e10); curso2.addStudent(e1); curso2.addStudent(e2);
-    curso2.addStudent(e3); 
+    curso2.addStudent(e3);
+    // Agrego a curso 3 
     curso3.addStudent(e4); curso3.addStudent(e6); curso3.addStudent(e9);
     curso3.addStudent(e7); curso3.addStudent(e8);
+    // Agrego a curso 4
     curso4.addStudent(e1); curso4.addStudent(e2); curso4.addStudent(e4); 
     cout << endl;
+
     cout << "Los siguientes cursos fueron creados y están disponibles: " << endl;
     cout << "+ Gambeta" << endl;
     cout << "+ Defensa" << endl;
@@ -256,6 +247,32 @@ int main() {
             cout << "Por favor, intente nuevamente." << endl;
         }
     }
-    
-    
+    // Deep copy del curso
+    cout << "Desea copiar un curso? (0/1): ";
+    bool answer;
+    cin >> answer;
+    if (answer) {
+        cout << "Ingrese el nombre del curso a copiar: ";
+        string course;
+        cin.ignore();
+        getline(cin, course);
+        cout << "Ingrese el nombre del nuevo curso: ";
+        string newCourse;
+        cin.ignore();
+        getline(cin, newCourse);
+        if (course == curso1.getName()) {
+            curso1.deepCopy(newCourse, curso1.getStudents());
+        } else if (course == curso2.getName()) {
+            curso2.deepCopy(newCourse, curso2.getStudents());
+        } else if (course == curso3.getName()) {
+            curso3.deepCopy(newCourse, curso3.getStudents());
+        } else if (course == curso4.getName()) {
+            curso4.deepCopy(newCourse, curso4.getStudents());
+        } else {
+            cout << "Curso no encontrado." << endl;
+            return 0;
+        }
+        
+    }
+
 }

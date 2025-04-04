@@ -1,4 +1,6 @@
-# Ejercicio 1:
+# README
+
+## Ejercicio 1:
 En este ejercicio se define una clase Time, que permite expresar un momento en el tiempo.
 
 *Para compilar, usar la siguiente línea:*
@@ -6,7 +8,7 @@ g++ <ej1.cpp> -Wall -g -o <ej1.exe>
 *Ejecutar con:*
 /.<ej1.exe>
 
-## Funcionalidades
+### Funcionalidades
 Se permite inicializar de las siguientes formas: 
 - Sin parámetros: 00h, 00m, 00s a.m.
 - Solo hora: HHh, 00m, 00s a.m.
@@ -21,7 +23,7 @@ Y se validan las siguientes cosas a la hora de ser inicializada:
 
 Las horas se pueden imprimir por terminal con formato 24hrs o con formato "am/pm".
 
-## Ejecución
+### Ejecución
 Al ejecutar el programa, se pedirá al usuario que:
 
 1) Elija el tipo de constructor.

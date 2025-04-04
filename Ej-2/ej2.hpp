@@ -51,6 +51,6 @@ class Curso {
         bool isInCourse(int legajo);
         void printStudents();
         void printStudentsOrdered();
-        void deepCopy(string name, vector<shared_ptr<Estudiante>> estudiantes);
+        void deepCopy(vector<shared_ptr<Estudiante>> estudiantes);
 };
 

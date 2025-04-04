@@ -16,7 +16,7 @@ float Estudiante::getAverage(){
     return sum / cursos.size();
 }
     // sobrecarga de operadores
-bool Estudiante::operator< (const Estudiante& other){
+bool Estudiante::operator< (const Estudiante& other) {
     if (this->nombreCompleto < other.nombreCompleto) return true;
     return false;
 }
@@ -87,6 +87,10 @@ bool Curso::isFull(){
 }
 
 void Curso::printStudents(){
+    if (estudiantes.empty()){
+        cout << "No hay estudiantes en el curso." << endl;
+        return;
+    }
     cout << "Lista de estudiantes: " << endl;
     for (size_t i = 0; i < estudiantes.size(); i++){
         cout << *estudiantes[i] << endl;
@@ -94,6 +98,11 @@ void Curso::printStudents(){
 }
 
 void Curso::printStudentsOrdered(){
+    if (estudiantes.empty()){
+        cout << "No hay estudiantes en el curso." << endl;
+        return;
+    }
+    cout << "Lista de estudiantes ordenada: " << endl;
     sort(estudiantes.begin(), estudiantes.end(), [](shared_ptr<Estudiante> a, shared_ptr<Estudiante> b) {
         return *a < *b;
     });
@@ -102,8 +111,11 @@ void Curso::printStudentsOrdered(){
     }
 }
 
-void Curso::deepCopy(string name, vector<shared_ptr<Estudiante>> estudiantes) {
-    this->name = name;
-    this->estudiantes = estudiantes;
-    this->size = estudiantes.size();
+void Curso::deepCopy(vector<shared_ptr<Estudiante>> estudiantes) {
+    vector<shared_ptr<Estudiante>> new_students;
+    for (size_t i = 0; i < estudiantes.size(); i++) {
+        shared_ptr<Estudiante> student = make_shared<Estudiante>(*estudiantes[i]);
+        new_students.push_back(student);
+    }
+    this->estudiantes = new_students;
 }

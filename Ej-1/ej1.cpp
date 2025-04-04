@@ -26,6 +26,7 @@ un valor erróneo, indicar esto por pantalla y permitir ingresar un nuevo valor 
 bien permitir salir del programa.
 */
 
+#pragma once
 #include <iostream>
 #include <iomanip>
 #include <string>

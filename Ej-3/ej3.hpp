@@ -12,89 +12,56 @@ implementación de cada una de las operaciones con los números que desee e
 imprima el resultado utilizando el método “toString”.  
 */
 
-#ifndef EJ3_HPP
-#define EJ3_HPP
-
+#pragma once
 #include <iostream>
 #include <string>
 #include <complex>
+#include <vector>
 
-using namespace std;
+using namespace std;   
 
 class Numero {
 public:
-    virtual Numero* suma(Numero* n);
-    virtual Numero* resta(Numero* n);
-    virtual Numero* multiplicacion(Numero* n);
-    virtual string toString();
-    virtual ~Numero() {}
+    virtual Numero* suma(Numero* n) = 0;
+    virtual Numero* resta(Numero* n) = 0;
+    virtual Numero* multiplicacion(Numero* n) = 0;
+    virtual string toString() = 0;
+    virtual ~Numero() = 0;
 };
-
+// Clase Entero
 class Entero : public Numero {
     private:
         int valor;
     public:
-        Entero(int valor);
-        Entero(double realValor);
-        Entero(complex<double> complexValor);
+        Entero(int v);
         Numero* suma(Numero* n) override;
         Numero* resta(Numero* n) override;
         Numero* multiplicacion(Numero* n) override;
         string toString() override;
-        
-        int getValor();
-        void setValor(int valor);
-        ~Entero() {}
+        ~Entero();
 };
 
+// Clase Real
 class Real : public Numero {
     private:
         double valor;
     public:
-        Real(double valor);
-        Real(int enteroValor);
-        Real(complex<double> complexValor);
+        Real(double v);
         Numero* suma(Numero* n) override;
         Numero* resta(Numero* n) override;
         Numero* multiplicacion(Numero* n) override;
         string toString() override;
-        
-        double getValor();
-        void setValor(double valor);
-        
-        ~Real() {}
+        ~Real();
 };
-
+// Clase Complejo
 class Complejo : public Numero {
     private:
         complex<double> valor;
     public:
-        Complejo(double real, double imaginario);
-        Complejo(int entero, int imaginario);
-        Complejo(Entero enteroValor);
-
+        Complejo(double re, double im);
         Numero* suma(Numero* n) override;
         Numero* resta(Numero* n) override;
         Numero* multiplicacion(Numero* n) override;
         string toString() override;
-        
-        complex<double> getValor();
-        void setValor(complex<double> valor);
-
-        ~Complejo() {}
+        ~Complejo();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif

@@ -1,6 +1,4 @@
-#ifndef ESTUDIANTE_H
-#define ESTUDIANTE_H
-
+#pragma once
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -56,4 +54,3 @@ class Curso {
         void deepCopy(string name, vector<shared_ptr<Estudiante>> estudiantes);
 };
 
-#endif

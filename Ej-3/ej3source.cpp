@@ -2,19 +2,92 @@
 
 using namespace std;
 
-// Costructores
-Entero::Entero(int valor) : valor(valor) {}
-Entero::Entero(double realValor) : valor(static_cast<int>(realValor)) {}
-Entero::Entero(complex<double> complexValor) : valor(static_cast<int>(complexValor.real())) {}
+Numero::~Numero() {}
 
-void Entero::setValor(int valor) {this->valor = valor;}
-int Entero::getValor() {return valor;}
+// Constructor de la clase Entero
+Entero::Entero(int v) : valor(v) {}
 
-Real::Real(double valor) : valor(valor) {}
-Real::Real(int enteroValor) : valor(static_cast<double>(enteroValor)) {}
-Real::Real(complex<double> complexValor) : valor(static_cast<double>(complexValor.real())) {}
+Numero* Entero::suma(Numero* n) {
+    Entero* otro = dynamic_cast<Entero*>(n);
+    if (otro)
+        return new Entero(valor + otro->valor);
+    return nullptr;
+}
 
-Complejo::Complejo(double real, double imaginario) : valor(real, imaginario) {}
-Complejo::Complejo(int entero, int imaginario) : valor(static_cast<double>(entero), static_cast<double>(imaginario)) {}
-Complejo::Complejo(Entero enteroValor) : valor(static_cast<double>(enteroValor.getValor()), 0) {}
+Numero* Entero::resta(Numero* n) {
+    Entero* otro = dynamic_cast<Entero*>(n);
+    if (otro)
+        return new Entero(valor - otro->valor);
+    return nullptr;
+}
+
+Numero* Entero::multiplicacion(Numero* n) {
+    Entero* otro = dynamic_cast<Entero*>(n);
+    if (otro)
+        return new Entero(valor * otro->valor);
+    return nullptr;
+}
+
+string Entero::toString() {
+    return to_string(valor);
+}
+Entero::~Entero() {}
+
+// Constructor de la clase Real
+Real::Real(double v) : valor(v) {}
+
+Numero* Real::suma(Numero* n) {
+    Real* otro = dynamic_cast<Real*>(n);
+    if (otro)
+        return new Real(valor + otro->valor);
+    return nullptr;
+}
+
+Numero* Real::resta(Numero* n) {
+    Real* otro = dynamic_cast<Real*>(n);
+    if (otro)
+        return new Real(valor - otro->valor);
+    return nullptr;
+}
+
+Numero* Real::multiplicacion(Numero* n) {
+    Real* otro = dynamic_cast<Real*>(n);
+    if (otro)
+        return new Real(valor * otro->valor);
+    return nullptr;
+}
+
+string Real::toString() {
+    return to_string(valor);
+}
+
+Real::~Real() {}
+
+// Constructor de la clase Complejo
+Complejo::Complejo(double re, double im) : valor(re, im) {}
+
+Numero* Complejo::suma(Numero* n) {
+    Complejo* otro = dynamic_cast<Complejo*>(n);
+    if (otro)
+        return new Complejo(valor.real() + otro->valor.real(), valor.imag() + otro->valor.imag());
+    return nullptr;
+}
+Numero* Complejo::resta(Numero* n) {
+    Complejo* otro = dynamic_cast<Complejo*>(n);
+    if (otro)
+        return new Complejo(valor.real() - otro->valor.real(), valor.imag() - otro->valor.imag());
+    return nullptr;
+}
+Numero* Complejo::multiplicacion(Numero* n) {
+    Complejo* otro = dynamic_cast<Complejo*>(n);
+    if (otro)
+        return new Complejo(valor.real() * otro->valor.real() - valor.imag() * otro->valor.imag(),
+                            valor.real() * otro->valor.imag() + valor.imag() * otro->valor.real());
+    return nullptr;
+}
+string Complejo::toString() {
+    return to_string(valor.real()) + " + " + to_string(valor.imag()) + "i";
+}
+Complejo::~Complejo() {}
+
 

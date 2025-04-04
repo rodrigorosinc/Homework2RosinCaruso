@@ -1,3 +1,37 @@
+# Ejercicio 1:
+En este ejercicio se define una clase Time, que permite expresar un momento en el tiempo.
+
+*Para compilar, usar la siguiente línea:*
+g++ <ej1.cpp> -Wall -g -o <ej1.exe>
+*Ejecutar con:*
+/.<ej1.exe>
+
+## Funcionalidades
+Se permite inicializar de las siguientes formas: 
+- Sin parámetros: 00h, 00m, 00s a.m.
+- Solo hora: HHh, 00m, 00s a.m.
+- Hora y minutos: HHh, MMm, 00s a.m.
+- Hora, minutos y segundos: HHh, MMm, SSs a.m.
+- Hora, minutos, segundos y período (a.m. / p.m.)
+
+Y se validan las siguientes cosas a la hora de ser inicializada:
+- La hora debe estar entre 0 y 12
+- Los minutos y segundos entre 0 y 59
+- El período solo puede ser "a.m." o "p.m."
+
+Las horas se pueden imprimir por terminal con formato 24hrs o con formato "am/pm".
+
+## Ejecución
+Al ejecutar el programa, se pedirá al usuario que:
+
+1) Elija el tipo de constructor.
+2) Ingrese los datos necesarios.
+3) Visualice el resultado en ambos formatos.
+4) Opcionalmente, modifique la hora ingresada.
+
+Si no se ingresan bien los datos, se pide al usuario ingresarlos bien.
+
+
 
 2.- Explciar el deep copy y el tipo de relacion de los obejetos.
 

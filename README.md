@@ -1,6 +1,9 @@
 # README
 
 ## Ejercicio 1:
+
+### Implementacion de un "reloj" con clases
+
 En este ejercicio se define una clase Time, que permite expresar un momento en el tiempo.
 
 ### Compilación
@@ -36,6 +39,9 @@ Si no se ingresan bien los datos, se pide al usuario ingresarlos bien.
 
 
 ## Ejercicio 2:
+
+### Interacción entre clases
+
 En este ejercicio se define una clase Curso y una clase Estudiante. La idea del programa es
 poder gestionar distintos cursos con las siguientes acciones, mediante un menú interactivo
 por consola.
@@ -47,7 +53,7 @@ por consola.
 
 ### Compilación
 Para compilar todos los archivos en una sola línea, hay que ejecutar:
-g++ <ej2main.cpp> <ej2source.cpp> -std=c++17 -o <ejecutableEj2.exe>
+g++ <ej2main.cpp> <ej2source.cpp> -Wall -g -o <ejecutableEj2.exe>
 Y se corre con:
 ./<ejecutableEj2.exe>
 
@@ -99,3 +105,82 @@ los alumnos no desaparecen (podrían seguir existiendo en otros cursos).
 
 ## Ejercicio 3:
 
+### Operaciones Numéricas con Polimorfismo en C++
+
+Este ejercicio implementa una jerarquía de clases para representar y operar con distintos tipos de números:
+**Enteros**, **Reales** y **Complejos**. Utiliza **herencia** y **polimorfismo** para definir una interfaz 
+común (`Numero`) que permite realizar operaciones como suma, resta y multiplicación entre objetos del mismo tipo.
+
+### Archivos
+
+- `ej3.hpp`: Define la interfaz `Numero` y las clases derivadas `Entero`, `Real` y `Complejo`, 
+cada una con su propia implementación de operaciones matemáticas.
+- `ej3.cpp`: Contiene la implementación de las operaciones definidas en las clases.
+- `main.cpp`: Prueba el funcionamiento de las clases realizando operaciones entre objetos de cada tipo, 
+imprimiendo los resultados por consola.
+
+## Compilación
+
+Para compilar el programa usar:
+g++ <ej3main.cpp> <ej3source.cpp> -Wall -g -o <ejecutableEj3.exe>
+Para ejecutalo, correr:
+./<ejecutableEj3.exe>
+
+### Funcionalidades
+
+Cada clase derivada implementa los siguientes métodos:
+
+- `Numero* suma(Numero* n)`
+- `Numero* resta(Numero* n)`
+- `Numero* multiplicacion(Numero* n)`
+- `std::string toString()`
+
+**Nota:** Las operaciones están definidas solamente entre objetos del mismo tipo. Si se intenta operar con otro tipo de número, se retorna `nullptr`. Por ejemplo, no se puede sumar un Real a un Entero. 
+
+## Ejercicio 4:
+
+###  Simulación de una Cuenta Bancaria. Herencia múltiple.
+
+En este ejercicio se define una clase CuentaCorriente que simula el comportamiento de una cuenta bancaria. El usuario puede realizar depósitos, extracciones y consultar el estado de su cuenta a través de un menú interactivo por consola.
+
+### Archivos
+- `cuenta_corriente.hpp`: Contiene la definición de la clase CuentaCorriente y sus métodos públicos.
+- `cuenta_corriente.cpp`: Implementación de los métodos de la clase.
+- `main.cpp`: Programa principal que permite interactuar con una cuenta a través de un menú.
+
+### Compilación
+Para compilar el programa completo, ejecutar:
+g++ <ej4main.cpp> <ej4.cpp> -Wall -g -o <ejecutableEj4.exe>
+Y para correrlo:
+./<ejecutableEj4.exe>
+
+### Funcionalidades
+Al ejecutar el programa, se pide al usuario crear una caja de ahorro o una cuenta corriente. Sujeto a esto,
+se presenta un menú que permite realizar las siguientes acciones:
+
+========= MENÚ =========
+1. Consultar saldo
+2. Depositar dinero
+3. Extraer dinero
+4. Salir
+
+========================
+
+### Descripción de las opciones
+1) Muestra el saldo actual de la cuenta.
+2) Permite ingresar un monto positivo a depositar.
+3) Permite retirar dinero, siempre que haya fondos suficientes. Si no hay fondos, se informa al usuario.
+4) Finaliza el programa.
+
+### Validaciones
++ No se permite depositar ni extraer montos negativos o cero.
++ No se puede extraer más dinero del que hay en la cuenta.
++ La cuenta se inicializa con 0 de balance.
+
+### Uso de especificadores de acceso
+
+- En la clase Cuenta, los atributos *balance* y *titular* son *protected*. Elegí esto para que las clases derivadas puedan acceder a ellos sin exponerlos. Los métodos como `depositar()`, `getBalance()` y los virtuales `retirar()` y `mostrarInfo()` son public ya que forman parte de la interfaz pública.
+
+- En CajaDeAhorro, *contador* es *private* porque solo lo usa la clase para controlar el número de visualizaciones. Se declara *friend* a `CuentaCorriente` para permitir el acceso directo al balance, si fuera necesario.
+
+- En CuentaCorriente, la referencia a `CajaDeAhorro` es private ya que representa un detalle interno de implementación. Sus métodos también son public para permitir su uso desde afuera.

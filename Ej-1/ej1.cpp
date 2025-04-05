@@ -65,14 +65,14 @@ class Time {
         am_pm = period;
     }
 
-    void readTime() {
+    void readTime() { // Display time in 12h format
         std::cout << "Time: " << std::setw(2) << std::setfill('0') << hours << "h, "
                   << std::setw(2) << std::setfill('0') << minutes << "m, "
                   << std::setw(2) << std::setfill('0') << seconds << "s "
                   << am_pm << std::endl;
     }
 
-    void readTime24hFormat (){
+    void readTime24hFormat (){ // Display time in 24h format
         int h24 = hours;
         if (am_pm == "p.m." && hours != 12) h24 += 12;
         if (am_pm == "a.m." && hours == 12) h24 = 0;
@@ -107,7 +107,7 @@ class Time {
 };
 
 
-void changeTime(Time& t) {
+void changeTime(Time& t) { // Function to change time
     bool error = true, change;
     std::cout << std::endl;
     std::cout << "Do you want to change the time? (yes (1) - no (0)): ";

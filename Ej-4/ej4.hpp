@@ -58,6 +58,7 @@ class CajaDeAhorro : public Cuenta{
     CajaDeAhorro(double balance_total, string titlar);
     void retirar(double cantidad) override;
     void mostrarInfo() override;
+    friend class CuentaCorriente; // Permite que CuentaCorriente acceda a los miembros privados de CajaDeAhorro
 };
 
 class CuentaCorriente : public Cuenta{

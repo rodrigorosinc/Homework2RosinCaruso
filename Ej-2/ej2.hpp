@@ -10,9 +10,9 @@ using namespace std;
 
 class Estudiante {
     private:
-        string nombreCompleto;
+        string nombreCompleto; 
         int legajo;
-        vector<tuple<string, float>> cursos; 
+        vector<tuple<string, float>> cursos;  // vector de tuplas (nombre del curso, nota)
 
     public:
         Estudiante(string nombreCompleto, int legajo);
@@ -21,9 +21,9 @@ class Estudiante {
         float getAverage();
         void addCourse(string course, float grade);
         void removeCourse(string course);
-        bool operator< (const Estudiante& other);
+        bool operator< (const Estudiante& other); // Sobrecarga del operador <
 
-        friend ostream& operator<< (ostream& os, const Estudiante& estudiante);
+        friend ostream& operator<< (ostream& os, const Estudiante& estudiante); // Sobrecarga del operador <<
 };
 
 class Curso {
@@ -52,5 +52,6 @@ class Curso {
         void printStudents();
         void printStudentsOrdered();
         void deepCopy(vector<shared_ptr<Estudiante>> estudiantes);
+        // Destructor
 };
 

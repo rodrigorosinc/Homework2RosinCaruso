@@ -4,6 +4,7 @@ using namespace std;
 // Clase Estudiante:
     // Constructor
 Estudiante::Estudiante(string nombreCompleto, int legajo) : nombreCompleto(nombreCompleto), legajo(legajo) {}
+   
     // getters
 string Estudiante::getName(){return nombreCompleto;};
 int Estudiante::getLegajo(){return legajo;};
@@ -11,19 +12,21 @@ float Estudiante::getAverage(){
     if (cursos.empty()) {return 0.0f;}
     float sum = 0;
     for (size_t i = 0; i < cursos.size(); i++){
-        sum += get<1>(cursos[i]);
+        sum += get<1>(cursos[i]); // el get<1> obtiene la nota del curso
     }
     return sum / cursos.size();
 }
+
     // sobrecarga de operadores
-bool Estudiante::operator< (const Estudiante& other) {
-    if (this->nombreCompleto < other.nombreCompleto) return true;
+bool Estudiante::operator< (const Estudiante& other) { 
+    if (this->nombreCompleto < other.nombreCompleto) return true; // Comparar por nombre, orden alfabético
     return false;
 }
-ostream& operator<< (ostream& os, const Estudiante& estudiante) {
-    os << "Nombre: " << estudiante.nombreCompleto << ", Legajo: " << estudiante.legajo;
+ostream& operator<< (ostream& os, const Estudiante& estudiante) { // Sobrecarga de operador de salida
+    os << "Nombre: " << estudiante.nombreCompleto << ", Legajo: " << estudiante.legajo; // Imprimir nombre y legajo
     return os;
 }
+
     // Métodos
 void Estudiante::addCourse(string course, float grade) {
     cursos.push_back(make_tuple(course, grade));
@@ -31,7 +34,7 @@ void Estudiante::addCourse(string course, float grade) {
 
 void Estudiante::removeCourse(string course) {
     for (size_t i = 0; i < cursos.size(); i++) {
-        if (get<0>(cursos[i]) == course) {
+        if (get<0>(cursos[i]) == course) { // el get<0> obtiene el nombre del curso
             cursos.erase(cursos.begin() + i);
             return;
         }
@@ -42,15 +45,18 @@ void Estudiante::removeCourse(string course) {
 // Clase Curso:
     // Constructor
 Curso::Curso(string cname) {max_capacity = 20; size = 0; name = cname;}
+    
     // getters
 vector<shared_ptr<Estudiante>> Curso::getStudents() {return estudiantes;}
 int Curso::getSize() {return size;}
 int Curso::getMaxCapacity() {return max_capacity;}
 string Curso::getName() {return name;}
+
     // setters
 void Curso::setStudents(vector<shared_ptr<Estudiante>> estudiantes) {this->estudiantes = estudiantes;}
 void Curso::setSize(int size) {this->size = size;}
 void Curso::setMaxCapacity(int max_capacity) {this->max_capacity = max_capacity;}
+
     // Métodos
 void Curso::addStudent(shared_ptr<Estudiante> estudiante) {
     if (size < max_capacity) {
@@ -60,7 +66,6 @@ void Curso::addStudent(shared_ptr<Estudiante> estudiante) {
         cout << "Curso completo" << endl;
     }
 } 
-
 void Curso::removeStudent(shared_ptr<Estudiante> estudiante){
     string name = estudiante->getName();
     for (size_t i = 0; i<size; i++){
@@ -71,7 +76,6 @@ void Curso::removeStudent(shared_ptr<Estudiante> estudiante){
         }
     }   
 }
-
 bool Curso::isInCourse(int legajo){
     for (size_t i = 0; i<size; i++){
         if (estudiantes[i]->getLegajo() == legajo){
@@ -80,12 +84,10 @@ bool Curso::isInCourse(int legajo){
     }
     return false;
 }
-
 bool Curso::isFull(){
     if (size == 20) {return true;}
     return false;
 }
-
 void Curso::printStudents(){
     if (estudiantes.empty()){
         cout << "No hay estudiantes en el curso." << endl;
@@ -96,7 +98,6 @@ void Curso::printStudents(){
         cout << *estudiantes[i] << endl;
     }
 }
-
 void Curso::printStudentsOrdered(){
     if (estudiantes.empty()){
         cout << "No hay estudiantes en el curso." << endl;
@@ -110,11 +111,12 @@ void Curso::printStudentsOrdered(){
         cout << *estudiantes[i] << endl;
     }
 }
-
 void Curso::deepCopy(vector<shared_ptr<Estudiante>> estudiantes) {
-    vector<shared_ptr<Estudiante>> new_students;
+    vector<shared_ptr<Estudiante>> new_students; // Crear un nuevo vector para almacenar los estudiantes copiados
+    // Iterar sobre el vector original y crear copias profundas de los estudiantes
     for (size_t i = 0; i < estudiantes.size(); i++) {
-        shared_ptr<Estudiante> student = make_shared<Estudiante>(*estudiantes[i]);
+        shared_ptr<Estudiante> student = make_shared<Estudiante>(*estudiantes[i]); // Crear una copia profunda del estudiante
+        // Agregar la copia al nuevo vector
         new_students.push_back(student);
     }
     this->estudiantes = new_students;

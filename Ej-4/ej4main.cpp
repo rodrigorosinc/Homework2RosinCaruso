@@ -1,7 +1,7 @@
 #include "ej4.hpp"
 
-
 using namespace std;
+
 int main() {
     cout << "Bienvenido al sistema de cuentas bancarias." << endl;
     cout << "Cree una cuenta de ahorro o una cuenta corriente." << endl;
@@ -34,10 +34,11 @@ int main() {
             cin >> balance;
         }
 
-        shared_ptr<CajaDeAhorro> cuenta = make_shared<CajaDeAhorro>(balance, titular);
+        shared_ptr<CajaDeAhorro> cuenta = make_shared<CajaDeAhorro>(balance, titular); // Creo una cuenta de ahorro
 
         bool exit = false;
         while (!exit) {
+            // Mostrar el menú de opciones
             cout << "Seleccione una opción:" << endl;
             cout << "1. Depositar dinero" << endl;
             cout << "2. Retirar dinero" << endl;
@@ -86,6 +87,7 @@ int main() {
         cout << "Ingrese el balance inicial de la cuenta: ";
         cin >> balance;
         cout << endl;
+        // Validar el balance
         while (balance < 0) {
             cout << "El balance inicial no puede ser negativo. Ingrese un balance válido: ";
             cout << endl;
@@ -94,12 +96,13 @@ int main() {
         cout << "Ingrese el balance inicial de la cuenta de ahorro: ";
         cin >> balanceAhorro;
         cout << endl;
+        // Validar el balance de la cuenta de ahorro
         while (balanceAhorro < 0) {
             cout << "El balance inicial no puede ser negativo. Ingrese un balance válido: ";
             cin >> balanceAhorro;
             cout << endl;
         }
-        // Validar el balance
+        // Crear la cuenta de ahorro y la cuenta corriente
         shared_ptr<CajaDeAhorro> cuentaAhorro = make_shared<CajaDeAhorro>(balanceAhorro, titular);
         shared_ptr<CuentaCorriente> cuentaCorriente = make_shared<CuentaCorriente>(balance, titular, cuentaAhorro);
         bool exit = false;

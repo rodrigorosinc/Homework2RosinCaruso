@@ -31,16 +31,16 @@ enum MenuOptions {
     SALIR = 10
 };
 
-void removeStudentFromCourse(Curso& curso, string name) {
-    auto students = curso.getStudents();
+void removeStudentFromCourse(Curso& curso, string name) { // Funcion para desinscribir un estudiante
+    auto students = curso.getStudents(); 
     if (students.empty()) {
         cout << "No hay estudiantes en el curso." << endl;
         return;
     }
     bool found = false;
     for (size_t i = 0; i < students.size(); i++) {
-        if (students[i]->getName() == name) {
-            curso.removeStudent(students[i]);
+        if (students[i]->getName() == name) { // Busco el estudiante por nombre
+            curso.removeStudent(students[i]); 
             cout << "Estudiante desinscripto." << endl;
             found = true;
             break;
@@ -139,7 +139,7 @@ int main() {
                 bool found = false;
                 for (size_t i = 0; i < cursos.size(); i++) { // Itero sobre los cursos
                     if (cursos[i]->getName() == course && !cursos[i]->isFull()) {
-                        // Busca si el estudiante ya existe
+                        // Busco si el estudiante ya existe
                         for (size_t j = 0; j < cursos[i]->getStudents().size(); j++) { // Itero sobre los estudiantes
                             if (cursos[i]->getStudents()[j]->getLegajo() == legajo) {  // Si el estudiante ya existe, no lo inscribo
                                 cout << "El estudiante ya está inscripto en el curso." << endl;
@@ -174,9 +174,9 @@ int main() {
                 int legajo;
                 cin >> legajo;
                 bool isInCourse = false;
-                for (size_t i = 0; i < cursos.size(); i++) {
-                    if (cursos[i]->getName() == course) {
-                        printIsInCourseLegajo(*cursos[i], legajo);
+                for (size_t i = 0; i < cursos.size(); i++) { // Itero sobre los cursos
+                    if (cursos[i]->getName() == course) { // Busco el curso
+                        printIsInCourseLegajo(*cursos[i], legajo); // Verifico si el estudiante está inscripto
                         isInCourse = true;
                         break;
                     }
@@ -185,7 +185,7 @@ int main() {
                     cout << "El estudiante no está inscripto en el curso." << endl;
                 }
                 cout << endl;
-            } else if (option == CURSO_COMPLETO) {
+            } else if (option == CURSO_COMPLETO) { 
                 cout << "Ingrese el nombre del curso: ";
                 string course;
                 cin.ignore();
@@ -210,8 +210,8 @@ int main() {
                 cout << endl;
                 bool found = false;
                 for (size_t i = 0; i < cursos.size(); i++) {
-                    if (cursos[i]->getName() == course) {
-                        (*cursos[i]).printStudents();
+                    if (cursos[i]->getName() == course) { // Busco el curso
+                        (*cursos[i]).printStudents(); // Imprimo la lista de estudiantes
                         found = true;
                         break;
                     }
@@ -262,9 +262,9 @@ int main() {
                 bool found = false;
                 for (size_t i = 0; i < cursos.size(); i++) {
                     if (cursos[i]->getName() == course) {
-                        Curso newCurso(newCourse);
-                        newCurso.deepCopy(cursos[i]->getStudents());
-                        cursos.push_back(make_shared<Curso>(newCurso));
+                        Curso newCurso(newCourse); // Crear un nuevo curso con el nombre proporcionado
+                        newCurso.deepCopy(cursos[i]->getStudents()); // Copiar los estudiantes del curso original
+                        cursos.push_back(make_shared<Curso>(newCurso)); // Agregar el nuevo curso a la lista de cursos
                         cout << "Curso copiado." << endl;
                         found = true;
                         break;

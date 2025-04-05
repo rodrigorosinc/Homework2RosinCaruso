@@ -24,13 +24,18 @@ void Cuenta::setBalance(double newCantidad){
 // Constructor
 CajaDeAhorro::CajaDeAhorro(double balance_total, string titlar) : Cuenta(balance_total, titlar), contador(0) {}
 // Métodos
-void CajaDeAhorro::retirar(double cantidad) {
-    if (balance >= cantidad) {
-        balance -= cantidad;
-        cout << "Retiro exitoso." << endl;
-    } else {
-        cout << "Fondos insuficientes." << endl;
+void CajaDeAhorro::retirar(double cantidad){
+    if (cantidad < 0){
+        cout << "La cantidad es negativa, no se puede retirar el dinero solicitado." << endl;
+        return;
     }
+    auto newBalance = balance - cantidad;
+    if (newBalance < 0){
+        cout << "No se puede retirar el dinero solicitado." << endl;
+    } else {
+        balance = newBalance;
+    }
+    return;
 }
 void CajaDeAhorro::mostrarInfo(){
     cout << "El tipo de cuenta es: Caja de ahorro." << endl;

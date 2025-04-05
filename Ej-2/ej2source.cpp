@@ -111,6 +111,13 @@ void Curso::printStudentsOrdered(){
         cout << *estudiantes[i] << endl;
     }
 }
+/*
+Para la copia, decidí usar un deep copy ya que hay que alocar la memoria del nuevo 
+vector de estudiantes. Un Deep Copy se usa cuando hay que asignar memoria dinámicamente. 
+Si yo tengo un curso nuevo, copiado de otro (con los mismos alumnos), quiero poder agregarle
+o sacarle estudiantes independientemente del curso al que se le hizo la copia. Por consiguiente, 
+necesito un nuevo vector de estudiantes.
+*/
 void Curso::deepCopy(vector<shared_ptr<Estudiante>> estudiantes) {
     vector<shared_ptr<Estudiante>> new_students; // Crear un nuevo vector para almacenar los estudiantes copiados
     // Iterar sobre el vector original y crear copias profundas de los estudiantes

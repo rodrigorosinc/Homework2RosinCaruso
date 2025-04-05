@@ -28,14 +28,14 @@ Y se validan las siguientes cosas a la hora de ser inicializada:
 Las horas se pueden imprimir por terminal con formato 24hrs o con formato "am/pm".
 
 ### Ejecución
-Al ejecutar el programa, se pedirá al usuario que:
+Al ejecutar el programa, sucede lo siguiente:
 
-1) Elija el tipo de constructor.
-2) Ingrese los datos necesarios.
-3) Visualice el resultado en ambos formatos.
-4) Opcionalmente, modifique la hora ingresada.
+1) Se pide al usuario que elija el tipo de constructor.
+2) Se pide al usuario que ingrese los datos.
+3) Luego, se imprime la hora en ambos formatos.
+4) Se da la opcion al usuario de cambiar la hora.
 
-Si no se ingresan bien los datos, se pide al usuario ingresarlos bien.
+Si no se ingresan bien los datos, nuevamente, se pregunta por los mismos.
 
 
 ## Ejercicio 2:
@@ -47,9 +47,9 @@ poder gestionar distintos cursos con las siguientes acciones, mediante un menú 
 por consola.
 
 ### Archivos
-- `ej2main.cpp`: archivo principal con el menú y lógica del programa.
-- `ej2source.cpp`: implementación de las clases Curso y Estudiante.
 - `ej2.hpp`: definiciones de clases.
+- `ej2source.cpp`: implementación de las clases Curso y Estudiante.
+- `ej2main.cpp`: archivo principal con el menú y lógica del programa.
 
 ### Compilación
 Para compilar todos los archivos en una sola línea, hay que ejecutar:
@@ -76,7 +76,7 @@ Luego se presenta un menú con las siguientes opciones:
     10. Salir
     ==========================================
 
-#### Descripción de opciones
+#### Descripción de las opciones
 
 1) Inscribe un nuevo estudiante a un curso disponible.
 2) Elimina un estudiante por su nombre de un curso.
@@ -89,37 +89,32 @@ Luego se presenta un menú con las siguientes opciones:
 9) Copia un curso existente con todos sus estudiantes (con un nuevo nombre).
 10) Sale del sistema.
 
-#### Elección de tipo de copia y relación entre objetos.
-
-Para el 9 (la copia), decidí usar un deep copy ya que hay que alocar la memoria del nuevo 
-vector de estudiantes. Un Deep Copy se usa cuando hay que asignar memoria dinámicamente. 
-Si yo tengo un curso nuevo, copiado de otro (con los mismos alumnos), quiero poder agregarle
-o sacarle estudiantes independientemente del curso al que se le hizo la copia. Por consiguiente, 
-necesito un nuevo vector de estudiantes.
+#### Relación entre objetos.
 
 El tipo de relacion que tienen los objetos entre sí es de agregación. Esto se debe a que un Curso
 tiene estudiantes pero no es dueño de ellos. Además, los estudiantes están gestionados por shared_ptr, 
 lo que indica que pueden pertenecer a más de un curso al mismo tiempo, y si se elimina un Curso, 
 los alumnos no desaparecen (podrían seguir existiendo en otros cursos).
 
+**Nota**: La explicación de por qué uso deep copy está en el archivo ej2source.cpp
 
 ## Ejercicio 3:
 
 ### Operaciones Numéricas con Polimorfismo en C++
 
-Este ejercicio implementa una jerarquía de clases para representar y operar con distintos tipos de números:
-**Enteros**, **Reales** y **Complejos**. Utiliza **herencia** y **polimorfismo** para definir una interfaz 
+Este ejercicio implementa ciertas clases para representar y operar con distintos tipos de números:
+**Enteros**, **Reales** y **Complejos**. Se utiliza **herencia** y **polimorfismo** para definir una interfaz 
 común (`Numero`) que permite realizar operaciones como suma, resta y multiplicación entre objetos del mismo tipo.
 
 ### Archivos
 
 - `ej3.hpp`: Define la interfaz `Numero` y las clases derivadas `Entero`, `Real` y `Complejo`, 
-cada una con su propia implementación de operaciones matemáticas.
-- `ej3.cpp`: Contiene la implementación de las operaciones definidas en las clases.
-- `main.cpp`: Prueba el funcionamiento de las clases realizando operaciones entre objetos de cada tipo, 
+cada una con su propia implementación de las operaciones.
+- `ej3source.cpp`: Contiene la implementación de las operaciones definidas en las clases.
+- `3j3main.cpp`: Prueba el funcionamiento de las clases realizando operaciones entre objetos de cada tipo, 
 imprimiendo los resultados por consola.
 
-## Compilación
+### Compilación
 
 Para compilar el programa usar:
 g++ <ej3main.cpp> <ej3source.cpp> -Wall -g -o <ejecutableEj3.exe>
@@ -141,16 +136,16 @@ Cada clase derivada implementa los siguientes métodos:
 
 ###  Simulación de una Cuenta Bancaria. Herencia múltiple.
 
-En este ejercicio se define una clase CuentaCorriente que simula el comportamiento de una cuenta bancaria. El usuario puede realizar depósitos, extracciones y consultar el estado de su cuenta a través de un menú interactivo por consola.
+En este ejercicio, se define una clase CuentaCorriente que simula el comportamiento de una cuenta bancaria. El usuario puede realizar depósitos, retiros y consultar el estado de su cuenta a través de un menú interactivo por consola.
 
 ### Archivos
-- `cuenta_corriente.hpp`: Contiene la definición de la clase CuentaCorriente y sus métodos públicos.
-- `cuenta_corriente.cpp`: Implementación de los métodos de la clase.
-- `main.cpp`: Programa principal que permite interactuar con una cuenta a través de un menú.
+- `ej4.hpp`: Contiene la definición de la clases.
+- `ej4source.cpp`: Implementación de los métodos de la clase.
+- `ej4main.cpp`: Programa principal que permite interactuar con una cuenta a través de un menú.
 
 ### Compilación
 Para compilar el programa completo, ejecutar:
-g++ <ej4main.cpp> <ej4.cpp> -Wall -g -o <ejecutableEj4.exe>
+g++ <ej4main.cpp> <ej4source.cpp> -Wall -g -o <ejecutableEj4.exe>
 Y para correrlo:
 ./<ejecutableEj4.exe>
 
@@ -167,6 +162,7 @@ se presenta un menú que permite realizar las siguientes acciones:
 ========================
 
 ### Descripción de las opciones
+
 1) Muestra el saldo actual de la cuenta.
 2) Permite ingresar un monto positivo a depositar.
 3) Permite retirar dinero, siempre que haya fondos suficientes. Si no hay fondos, se informa al usuario.
@@ -175,7 +171,6 @@ se presenta un menú que permite realizar las siguientes acciones:
 ### Validaciones
 + No se permite depositar ni extraer montos negativos o cero.
 + No se puede extraer más dinero del que hay en la cuenta.
-+ La cuenta se inicializa con 0 de balance.
 
 ### Uso de especificadores de acceso
 
